@@ -18,7 +18,7 @@ namespace TradeMarket.Tests.BusinessTests
     {
 
         [Test]
-        public async Task CustomerService_GetAll_ReturnsAllCustomers()
+        public async Task CustomerServiceGetAllReturnsAllCustomers()
         {
             //arrange
             var expected = GetTestCustomerModels;
@@ -38,7 +38,7 @@ namespace TradeMarket.Tests.BusinessTests
         }
 
         [Test]
-        public async Task CustomerService_GetById_ReturnsCustomerModel()
+        public async Task CustomerServiceGetByIdReturnsCustomerModel()
         {
             //arrange
             var expected = GetTestCustomerModels.First();
@@ -58,7 +58,7 @@ namespace TradeMarket.Tests.BusinessTests
         }
 
         [Test]
-        public async Task CustomerService_AddAsync_AddsModel()
+        public async Task CustomerServiceAddAsyncAddsModel()
         {
             //arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -77,7 +77,7 @@ namespace TradeMarket.Tests.BusinessTests
         }
 
         [Test]
-        public async Task CustomerService_AddAsync_ThrowsMarketExceptionWithEmptyName()
+        public async Task CustomerServiceAddAsyncThrowsMarketExceptionWithEmptyName()
         {
             //arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -96,7 +96,7 @@ namespace TradeMarket.Tests.BusinessTests
 
 
         [Test]
-        public async Task CustomerService_AddAsync_ThrowsMarketExceptionWithNullObject()
+        public async Task CustomerServiceAddAsyncThrowsMarketExceptionWithNullObject()
         {
             //arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -113,7 +113,7 @@ namespace TradeMarket.Tests.BusinessTests
 
         [TestCase(1)]
         [TestCase(2)]
-        public async Task CustomerService_DeleteAsync_DeletesCustomer(int id)
+        public async Task CustomerServiceDeleteAsyncDeletesCustomer(int id)
         {
             //arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -130,7 +130,7 @@ namespace TradeMarket.Tests.BusinessTests
 
         [TestCase("2099-10-10")]
         [TestCase("1000-1-1")]
-        public async Task CustomerService_AddAsync_ThrowsMarketExceptionWithInvalidDate(DateTime birthDate)
+        public async Task CustomerServiceAddAsyncThrowsMarketExceptionWithInvalidDate(DateTime birthDate)
         {
             //arrange 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -148,7 +148,7 @@ namespace TradeMarket.Tests.BusinessTests
         }
 
         [Test]
-        public async Task CustomerService_UpdateAsync_UpdatesCustomer()
+        public async Task CustomerServiceUpdateAsyncUpdatesCustomer()
         {
             //arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -168,7 +168,7 @@ namespace TradeMarket.Tests.BusinessTests
         }
 
         [Test]
-        public async Task CustomerService_UpdateAsync_ThrowsMarketExceptionWithEmptySurname()
+        public async Task CustomerServiceUpdateAsyncThrowsMarketExceptionWithEmptySurname()
         {
             //arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -187,7 +187,7 @@ namespace TradeMarket.Tests.BusinessTests
 
         [TestCase("2050-1-1")]
         [TestCase("1330-1-1")]
-        public async Task CustomerService_UpdateAsync_ThrowsMarketExceptionWithInvalidDate(DateTime birthDate)
+        public async Task CustomerServiceUpdateAsyncThrowsMarketExceptionWithInvalidDate(DateTime birthDate)
         {
             //arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -208,7 +208,7 @@ namespace TradeMarket.Tests.BusinessTests
         [TestCase(3, new[] { 1 })]
         [TestCase(8, new[] { 1, 2, 3})]
         [TestCase(5, new[] { 4 })]
-        public async Task CustomerService_GetCustomersByProductIdAsync_ReturnsCustomersWhoBoughtProduct(int productId, int[] expectedCustomerIds)
+        public async Task CustomerServiceGetCustomersByProductIdAsyncReturnsCustomersWhoBoughtProduct(int productId, int[] expectedCustomerIds)
         {
             //arrange
             var expected = GetTestCustomerModels.Where(x => expectedCustomerIds.Contains(x.Id)).ToList();
@@ -237,7 +237,7 @@ namespace TradeMarket.Tests.BusinessTests
                 new CustomerModel { Id = 4, Name = "Lebron", Surname = "James", BirthDate = new DateTime(1983, 12, 31), DiscountValue = 12, ReceiptsIds = new List<int>(){ 4 } }
             };
 
-        public List<Person> GetTestPersonEntities =>
+        public static List<Person> GetTestPersonEntities =>
            new List<Person>()
            {
                 new Person { Id = 1, Name = "Viktor", Surname = "Zhuk", BirthDate = new DateTime(1995, 1, 2) }, 
@@ -246,7 +246,7 @@ namespace TradeMarket.Tests.BusinessTests
                 new Person { Id = 4, Name = "Lebron", Surname = "James", BirthDate = new DateTime(1983, 12, 31) }
            };
 
-        public List<Customer> GetTestCustomerEntities =>
+        public static List<Customer> GetTestCustomerEntities =>
             new List<Customer>()
             {   
                 new Customer { Id = 1, PersonId = 1, Person = GetTestPersonEntities[0], DiscountValue = 10, Receipts = new List<Receipt> {GetTestReceiptsEntitiesWithReceiptDetails[0]} },
@@ -255,7 +255,7 @@ namespace TradeMarket.Tests.BusinessTests
                 new Customer { Id = 4, PersonId = 4, Person = GetTestPersonEntities[3], DiscountValue = 12, Receipts = new List<Receipt> {GetTestReceiptsEntitiesWithReceiptDetails[3]} },
             };
 
-        public List<Receipt> GetTestReceiptsEntitiesWithReceiptDetails =>
+        public static List<Receipt> GetTestReceiptsEntitiesWithReceiptDetails =>
              new List<Receipt>()
              {
                 new Receipt

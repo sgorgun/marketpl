@@ -105,9 +105,9 @@ namespace TradeMarket.Tests.DataTests
             var receiptDetail = receiptDetails.FirstOrDefault(x => x.Id == 1);
 
             Assert.That(receiptDetails, Is.EqualTo(ExpectedReceiptsDetails).Using(new ReceiptDetailEqualityComparer()), message: "GetAllWithDetailsAsync method works incorrect");
-            Assert.That(receiptDetail.Product, Is.Not.Null, message: "GetByIdWithDetailsAsync method doesnt't return included entities");
-            Assert.That(receiptDetail.Receipt, Is.Not.Null, message: "GetByIdWithDetailsAsync method doesnt't return included entities");
-            Assert.That(receiptDetail.Product.Category, Is.Not.Null, message: "GetByIdWithDetailsAsync method doesnt't return included entities");
+            Assert.That(receiptDetail.Product, Is.Not.Null, message: "GetAllWithDetailsAsync method doesnt't return included entities");
+            Assert.That(receiptDetail.Receipt, Is.Not.Null, message: "GetAllWithDetailsAsync method doesnt't return included entities");
+            Assert.That(receiptDetail.Product.Category, Is.Not.Null, message: "GetAllWithDetailsAsync method doesnt't return included entities");
         }
 
         private static IEnumerable<ReceiptDetail> ExpectedReceiptsDetails =>

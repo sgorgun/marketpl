@@ -134,10 +134,10 @@ namespace TradeMarket.Tests.DataTests
                 Is.EqualTo(ExpectedReceiptsDetails).Using(new ReceiptDetailEqualityComparer()), message: "GetAllWithDetailsAsync method doesnt't return included entities");
 
             Assert.That(receipts.SelectMany(i => i.ReceiptDetails).Select(i => i.Product).Distinct().OrderBy(i => i.Id),
-                Is.EqualTo(ExpectedProducts).Using(new ProductEqualityComparer()), message: "GetByIdWithDetailsAsync method doesnt't return included entities");
+                Is.EqualTo(ExpectedProducts).Using(new ProductEqualityComparer()), message: "GetAllWithDetailsAsync method doesnt't return included entities");
 
             Assert.That(receipts.SelectMany(i => i.ReceiptDetails).Select(i => i.Product.Category).Distinct().OrderBy(i => i.Id),
-                Is.EqualTo(ExpectedProductCategories).Using(new ProductCategoryEqualityComparer()), message: "GetByIdWithDetailsAsync method doesnt't return included entities");
+                Is.EqualTo(ExpectedProductCategories).Using(new ProductCategoryEqualityComparer()), message: "GetAllWithDetailsAsync method doesnt't return included entities");
 
             Assert.That(receipts.Select(i => i.Customer).Distinct().OrderBy(i => i.Id),
                 Is.EqualTo(ExpectedCustomers).Using(new CustomerEqualityComparer()), message: "GetAllWithDetailsAsync method doesnt't return included entities");

@@ -131,7 +131,7 @@ namespace TradeMarket.Tests.BusinessTests
                 new ReceiptDetail { Id = 9, ProductId = 6, UnitPrice = 25, Product = ProductEntities.ElementAt(5), DiscountUnitPrice = 24, Quantity = 1, ReceiptId = 4 },
                 new ReceiptDetail { Id = 10, ProductId = 8, UnitPrice = 20, Product = ProductEntities.ElementAt(7), DiscountUnitPrice = 15,  Quantity = 50, ReceiptId = 5 },
                 new ReceiptDetail { Id = 11, ProductId = 9, UnitPrice = 35, Product = ProductEntities.ElementAt(8), DiscountUnitPrice = 26, Quantity = 24, ReceiptId = 5},
-                new ReceiptDetail { Id = 12, ProductId = 2, UnitPrice = 20, Product = ProductEntities.ElementAt(0), DiscountUnitPrice = 18, Quantity = 25, ReceiptId = 5}
+                new ReceiptDetail { Id = 12, ProductId = 2, UnitPrice = 20, Product = ProductEntities.ElementAt(1), DiscountUnitPrice = 18, Quantity = 25, ReceiptId = 5}
             };
 
         private static readonly IEnumerable<Customer> CustomerEntities =
@@ -196,7 +196,7 @@ namespace TradeMarket.Tests.BusinessTests
                 new CustomerActivityModel { CustomerId = 3, CustomerName = "Dezmond Morris", ReceiptSum = 159 }
             };
 
-        private static readonly IEnumerable<ProductModel> ExpectedCustomersMostPopularProducts = 
+        public static IEnumerable<ProductModel> ExpectedCustomersMostPopularProducts = 
             new List<ProductModel>()
             {
                ProductModels.ElementAt(7), ProductModels.ElementAt(1), ProductModels.ElementAt(8)

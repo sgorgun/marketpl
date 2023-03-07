@@ -194,7 +194,7 @@ namespace TradeMarket.Tests.BusinessTests
             mockUnitOfWork.Setup(x => x.ReceiptRepository.GetByIdWithDetailsAsync(It.IsAny<int>())).ReturnsAsync(receipt);
             mockUnitOfWork.Setup(x => x.ProductRepository.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(ProductEntities.FirstOrDefault(x => x.Id == productId));
             mockUnitOfWork.Setup(x => x.ReceiptDetailRepository.AddAsync(It.IsAny<ReceiptDetail>()));
-           var receiptService = new ReceiptService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var receiptService = new ReceiptService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
 
             //act
             await receiptService.AddProductAsync(productId, 1, 8);

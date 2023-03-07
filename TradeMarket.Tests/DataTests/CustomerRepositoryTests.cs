@@ -15,7 +15,7 @@ namespace TradeMarket.Tests.DataTests
     {
         [TestCase(1)]
         [TestCase(2)]
-        public async Task CustomerRepository_GetByIdAsync_ReturnsSingleValue(int id)
+        public async Task CustomerRepositoryGetByIdAsyncReturnsSingleValue(int id)
         {
             using var context = new TradeMarketDbContext(UnitTestHelper.GetUnitTestDbOptions());
 
@@ -29,7 +29,7 @@ namespace TradeMarket.Tests.DataTests
         }
 
         [Test]
-        public async Task CustomerRepository_GetAllAsync_ReturnsAllValues()
+        public async Task CustomerRepositoryGetAllAsyncReturnsAllValues()
         {
             using var context = new TradeMarketDbContext(UnitTestHelper.GetUnitTestDbOptions());
 
@@ -41,7 +41,7 @@ namespace TradeMarket.Tests.DataTests
         }
 
         [Test]
-        public async Task CustomerRepository_AddAsync_AddsValueToDatabase()
+        public async Task CustomerRepositoryAddAsyncAddsValueToDatabase()
         {
             using var context = new TradeMarketDbContext(UnitTestHelper.GetUnitTestDbOptions());
 
@@ -55,7 +55,7 @@ namespace TradeMarket.Tests.DataTests
         }
 
         [Test]
-        public async Task CustomerRepository_DeleteByIdAsync_DeletesEntity()
+        public async Task CustomerRepositoryDeleteByIdAsyncDeletesEntity()
         {
             using var context = new TradeMarketDbContext(UnitTestHelper.GetUnitTestDbOptions());
 
@@ -68,7 +68,7 @@ namespace TradeMarket.Tests.DataTests
         }
 
         [Test]
-        public async Task CustomerRepository_Update_UpdatesEntity()
+        public async Task CustomerRepositoryUpdateUpdatesEntity()
         {
             using var context = new TradeMarketDbContext(UnitTestHelper.GetUnitTestDbOptions());
 
@@ -92,7 +92,7 @@ namespace TradeMarket.Tests.DataTests
         }
 
         [Test]
-        public async Task CustomerRepository_GetByIdWithDetailsAsync_ReturnsWithIncludedEntities()
+        public async Task CustomerRepositoryGetByIdWithDetailsAsyncReturnsWithIncludedEntities()
         {
             using var context = new TradeMarketDbContext(UnitTestHelper.GetUnitTestDbOptions());
 
@@ -116,7 +116,7 @@ namespace TradeMarket.Tests.DataTests
         }
 
         [Test]
-        public async Task CustomerRepository_GetAllWithDetailsAsync_ReturnsWithIncludedEntities()
+        public async Task CustomerRepositoryGetAllWithDetailsAsyncReturnsWithIncludedEntities()
         {
             using var context = new TradeMarketDbContext(UnitTestHelper.GetUnitTestDbOptions());
 
