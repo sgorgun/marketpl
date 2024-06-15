@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Models;
+using Business.Validation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,48 +15,73 @@ namespace WebApi.Controllers
     {
         private readonly ICustomerService _customerService;
 
-        //Inject customer service via constructor
+        public CustomersController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
 
         // GET: api/customers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CustomerModel>>> Get()
         {
-            throw new NotImplementedException();
+            return Ok(await _customerService.GetAllAsync());
         }
 
         //GET: api/customers/1
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerModel>> GetById(int id)
         {
-            throw new NotImplementedException();
+            var customer = await _customerService.GetByIdAsync(id);
+
+            if (customer == null)
+                return NotFound();
+
+            return Ok(customer);
         }
-        
+
         //GET: api/customers/products/1
         [HttpGet("products/{id}")]
         public async Task<ActionResult<CustomerModel>> GetByProductId(int id)
         {
-            throw new NotImplementedException();
+            return Ok(await _customerService.GetCustomersByProductIdAsync(id));
         }
 
         // POST: api/customers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] CustomerModel value)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _customerService.AddAsync(value);
+            }
+            catch (MarketException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return Ok(value);
         }
 
         // PUT: api/customers/1
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int Id, [FromBody] CustomerModel value)
         {
-            throw new NotImplementedException();
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            if (Id != value.Id)
+                throw new MarketException();
+
+            await _customerService.UpdateAsync(value);
+            return Ok();
         }
 
         // DELETE: api/customers/1
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            await _customerService.DeleteAsync(id);
+            return Ok();
         }
     }
 }
