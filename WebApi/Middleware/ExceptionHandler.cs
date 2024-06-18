@@ -27,39 +27,51 @@ namespace WebApi.Middleware
             {
                 await _next.Invoke(context);
             }
-            catch (Exception ex)
+            catch (KeyNotFoundException ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
+            catch (ArgumentNullException ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
+            catch (ArgumentException ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
+            catch (MarketException ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
+            catch (InvalidOperationException ex)
             {
                 await HandleExceptionAsync(context, ex);
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             if (context == null)
             {
                 throw new MarketException(nameof(context));
             }
 
-            var code = HttpStatusCode.InternalServerError;
-
-            switch (exception)
-            {
-                case KeyNotFoundException:
-                    code = HttpStatusCode.NotFound;
-                    break;
-                case ArgumentNullException:
-                case ArgumentException:
-                case MarketException:
-                    code = HttpStatusCode.BadRequest;
-                    break;
-            }
+            var code = GetStatusCode(exception);
 
             context.Response.ContentType = "application/text";
             context.Response.StatusCode = (int)code;
 
-            var result = exception.Message;
+            await context.Response.WriteAsync(exception.Message);
+        }
 
-            return context.Response.WriteAsync(result);
+        private static HttpStatusCode GetStatusCode(Exception exception)
+        {
+            return exception switch
+            {
+                KeyNotFoundException => HttpStatusCode.NotFound,
+                ArgumentNullException or ArgumentException or MarketException => HttpStatusCode.BadRequest,
+                _ => HttpStatusCode.InternalServerError
+            };
         }
     }
 }

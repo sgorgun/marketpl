@@ -26,7 +26,7 @@ namespace WebApi.Controllers
         {
             if (categoryId != null || minPrice != null || maxPrice != null)
             {
-                FilterSearchModel newFilter = new FilterSearchModel()
+                FilterSearchModel newFilter = new ()
                 {
                     CategoryId = categoryId,
                     MinPrice = minPrice,
