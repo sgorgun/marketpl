@@ -89,20 +89,9 @@ namespace WebApi.Controllers
 
         // PUT: api/receipts/1
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int Id, [FromBody] ReceiptModel value)
+        public async Task<ActionResult> Put([FromBody] ReceiptModel value)
         {
-            if (await _receiptService.GetByIdAsync(Id) == null)
-                return NotFound();
-
-            try
-            {
-                await _receiptService.UpdateAsync(value);
-
-            }
-            catch (MarketException)
-            {
-                return BadRequest();
-            }
+            await _receiptService.UpdateAsync(value);
             return Ok();
         }
 

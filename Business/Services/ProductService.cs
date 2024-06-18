@@ -6,6 +6,7 @@ using Data.Entities;
 using Data.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,15 +106,22 @@ namespace Business.Services
 
         public async Task UpdateAsync(ProductModel model)
         {
-            if (model.IsValidModel())
+            if (!ModelsValidator.IsValidModel(model))
             {
-                var product = _mapper.Map<Product>(model);
-
-                _unitOfWork.ProductRepository.Update(product);
-
-                await _unitOfWork.SaveAsync();
+                throw new ValidationException("Model is invalid");
             }
+
+            var productEntity = await _unitOfWork.ProductRepository.GetByIdAsync(model.Id);
+            if (productEntity == null)
+            {
+                throw new KeyNotFoundException($"Product with ID {model.Id} not found.");
+            }
+
+            _mapper.Map(model, productEntity);
+            _unitOfWork.ProductRepository.Update(productEntity);
+            await _unitOfWork.SaveAsync();
         }
+
 
         public async Task UpdateCategoryAsync(ProductCategoryModel categoryModel)
         {
